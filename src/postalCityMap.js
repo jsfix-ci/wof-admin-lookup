@@ -3,7 +3,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const stable = require('stable');
-const csv = require('csv-parse/lib/sync');
+const csv = require('csv-parse/sync');
 const config = require('pelias-config').generate();
 const logger = require('pelias-logger').get('wof-admin-lookup');
 const tsvOptions = {
@@ -128,7 +128,7 @@ function parse(filepath, defaultWeight){
   contents = contents.split('\n').map(l => l.split('#')[0]).join('\n');
 
   // parse TSV file
-  const lines = csv(contents, tsvOptions);
+  const lines = csv.parse(contents, tsvOptions);
 
   return lines.filter(line => {
     // ensure the 3 mandatory columns are present
